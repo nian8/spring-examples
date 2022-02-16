@@ -2,8 +2,11 @@ package com.yee.sca.nacos.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yee.sca.nacos.config.OrderProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/demo")
+@RefreshScope
 public class DemoController {
 
     @Autowired
@@ -37,6 +41,13 @@ public class DemoController {
     public Map<String, Object> test02() {
         return new JSONObject().fluentPut("payTimeoutSeconds", payTimeoutSeconds)
                 .fluentPut("createFrequencySeconds", createFrequencySeconds);
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @GetMapping("/logger")
+    public void logger() {
+        logger.debug("[logger][测试一下]");
     }
 
 }
