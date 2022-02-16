@@ -1,6 +1,5 @@
 package com.yee.sca.nacos.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yee.sca.nacos.config.OrderProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/demo")
@@ -33,14 +33,19 @@ public class DemoController {
     private Integer payTimeoutSeconds;
     @Value(value = "${order.create-frequency-seconds}")
     private Integer createFrequencySeconds;
+    @Value(value = "${order.secret-key:}")
+    private String secretKey;
 
     /**
      * 测试 @Value 注解的属性
      */
     @GetMapping("/test02")
     public Map<String, Object> test02() {
-        return new JSONObject().fluentPut("payTimeoutSeconds", payTimeoutSeconds)
-                .fluentPut("createFrequencySeconds", createFrequencySeconds);
+        Map<String, Object> result = new ConcurrentHashMap<>();
+        result.put("payTimeoutSeconds", payTimeoutSeconds);
+        result.put("createFrequencySeconds", createFrequencySeconds);
+        result.put("secretKey", secretKey);
+        return result;
     }
 
     private final Logger logger = LoggerFactory.getLogger(getClass());

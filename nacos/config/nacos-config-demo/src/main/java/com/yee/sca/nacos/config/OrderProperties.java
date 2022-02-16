@@ -1,8 +1,15 @@
 package com.yee.sca.nacos.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author nian8
+ */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "order")
 public class OrderProperties {
@@ -17,22 +24,6 @@ public class OrderProperties {
      */
     private Integer createFrequencySeconds;
 
-    public Integer getPayTimeoutSeconds() {
-        return payTimeoutSeconds;
-    }
-
-    public OrderProperties setPayTimeoutSeconds(Integer payTimeoutSeconds) {
-        this.payTimeoutSeconds = payTimeoutSeconds;
-        return this;
-    }
-
-    public Integer getCreateFrequencySeconds() {
-        return createFrequencySeconds;
-    }
-
-    public OrderProperties setCreateFrequencySeconds(Integer createFrequencySeconds) {
-        this.createFrequencySeconds = createFrequencySeconds;
-        return this;
-    }
+    private String secretKey;
 
 }

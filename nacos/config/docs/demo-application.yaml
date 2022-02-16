@@ -3,3 +3,13 @@ order:
   pay-timeout-seconds: 120
   # 订单创建频率，单位：秒
   create-frequency-seconds: 60
+  #
+  secret-key: ENC(KNrhemmJW22gtcrI+Pk31GXqnmHmD4xkwvxUXx3S9TM=)
+jasypt:
+  # jasypt 配置项，对应 JasyptEncryptorConfigurationProperties 配置类
+  encryptor:
+    #加密算法
+    algorithm: PBEWithMD5AndDES
+    # 加密秘钥
+    password: justdoit
+# blank
