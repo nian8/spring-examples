@@ -1,4 +1,4 @@
-package cn.iocoder.springcloudalibaba.labx5.nacosdemo.listener;
+package com.yee.sca.nacos.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,10 +8,15 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Component;
 
+/**
+ * 自定义环境变更监听器
+ * <p>
+ * {@link org.springframework.cloud.logging.LoggingRebinder}
+ */
 @Component
 public class DemoEnvironmentChangeListener implements ApplicationListener<EnvironmentChangeEvent> {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private ConfigurableEnvironment environment;
