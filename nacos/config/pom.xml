@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>nacos-config-demo</module>
-        <!--<module>labx-05-sca-nacos-config-demo</module>
+        <!--
         <module>labx-05-sca-nacos-config-demo-profiles</module>
         <module>labx-05-sca-nacos-config-auto-refresh</module>
         <module>labx-05-sca-nacos-config-demo-jasypt</module>
