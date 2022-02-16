@@ -1,4 +1,4 @@
-[nacos-config](http://www.iocoder.cn/Spring-Cloud-Alibaba/Nacos-Config/)
+[nacos-config](https://www.iocoder.cn/Spring-Cloud-Alibaba/Nacos-Config/)
 
 
 Nacos Config 提供了三种配置 Nacos 配置集的方式：

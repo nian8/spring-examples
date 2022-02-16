@@ -1,6 +1,6 @@
 package comyee.sca.nacos;
 
-import com.yee.sca.nacos.DemoApplication;
+import com.yee.sca.nacos.ConfigDemoApplication;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DemoApplication.class)
+@SpringBootTest(classes = ConfigDemoApplication.class)
 public class JasyptTest {
 
     @Autowired
