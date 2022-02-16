@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yee.spring</groupId>
+        <artifactId>exs-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>sca-nacos-config</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>nacos-config-demo</module>
+        <!--<module>labx-05-sca-nacos-config-demo</module>
+        <module>labx-05-sca-nacos-config-demo-profiles</module>
+        <module>labx-05-sca-nacos-config-auto-refresh</module>
+        <module>labx-05-sca-nacos-config-demo-jasypt</module>
+        <module>labx-05-sca-nacos-config-demo-actuator</module>
+        <module>labx-05-sca-nacos-config-demo-multi</module>-->
+    </modules>
+</project>
