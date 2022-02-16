@@ -1,16 +1,12 @@
 spring:
-  application:
-    name: demo-provider # Spring 应用名
   cloud:
     nacos:
       # Nacos 作为注册中心的配置项，对应 NacosDiscoveryProperties 配置类
       discovery:
         # Nacos 服务器地址
         server-addr: localhost:8848
-        # 使用的 Nacos 的命名空间，默认为 null
+        # Nacos 命名空间 dev 的编号
         namespace: 357d9a8b-6f4f-48da-8da9-f3658001e079
         # 注册到 Nacos 的服务名。默认值为 ${spring.application.name}。
         service: ${spring.application.name}
 #
-server:
-  port: 18080 # 服务器端口。默认为 8080
