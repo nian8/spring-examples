@@ -10,7 +10,27 @@ spring:
         # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
         group: DEFAULT_GROUP
         # 使用的 Nacos 配置集的 dataId，默认为 spring.application.name
-        name:
+        name: ${spring.application.name}
         # 使用的 Nacos 配置集的 dataId 的文件拓展名，同时也是 Nacos 配置集的配置格式，默认为 properties
         file-extension: yaml
+        # 拓展配置集数组，对应 Config 数组
+        extension-configs:
+          - data-id: extension-dataId-01.yaml
+            # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
+            group: DEFAULT_GROUP
+            # 是否自动刷新配置，默认为 false
+            refresh: true
+          - data-id: extension-dataId-02.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+        # 共享配置集数组，对应 Config 数组
+        shared-configs:
+          - data-id: shared-dataId-01.yaml
+            # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
+            group: DEFAULT_GROUP
+            # 是否自动刷新配置，默认为 false
+            refresh: true
+          - data-id: shared-dataId-02.yaml
+            group: DEFAULT_GROUP
+            refresh: true
 # blank
