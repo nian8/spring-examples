@@ -13,6 +13,11 @@ spring:
           enabled: true
           # 路由的目标地址的表达式(SpringEL)，默认为 "'lb://' + serviceId"
           url-expression: "'lb://'+serviceId"
+      # 默认过滤器，对应 FilterDefinition 数组
+      default-filters:
+        - name: Auth
+          args:
+            token-header-name: access-token
     # Nacos 作为注册中心的配置项
     nacos:
       discovery:
