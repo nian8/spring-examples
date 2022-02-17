@@ -8,6 +8,11 @@ spring:
     gateway:
       metrics:
         enabled: true
+      # Reactor Netty 相关配置
+      httpserver:
+        wiretap: true
+      httpclient:
+        wiretap: true
       # 与 Spring Cloud 注册中心的集成，对应 DiscoveryLocatorProperties 类
       discovery:
         locator:
