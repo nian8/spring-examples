@@ -1,3 +1,6 @@
+GET http://127.0.0.1:8888/oschina
+
+###
 GET http://127.0.0.1:8888/baidu
 
 ### 测试 AuthGatewayFilterFactory
