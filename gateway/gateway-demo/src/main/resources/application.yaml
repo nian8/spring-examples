@@ -26,4 +26,22 @@ spring:
             - Path=/oschina
           filters:
             - StripPrefix=1
+      # 与 Spring Cloud 注册中心的集成，对应 DiscoveryLocatorProperties 类
+      discovery:
+        locator:
+          # 是否开启，默认为 false 关闭
+          enabled: true
+          # 路由的目标地址的表达式(SpringEL)，默认为 "'lb://' + serviceId"
+          url-expression: "'lb://'+serviceId"
+    # Nacos 作为注册中心的配置项
+    nacos:
+      discovery:
+        # Nacos 服务器地址
+        server-addr: 127.0.0.1:8848
+
+logging:
+  level:
+    reactor.netty: DEBUG
+    org.springframework.web.reactive: TRACE
+    org.springframework.cloud.gateway: TRACE
 #

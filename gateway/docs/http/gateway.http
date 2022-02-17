@@ -1,0 +1,4 @@
+GET http://127.0.0.1:8888/user-service/user/get?id=1
+Accept: application/json
+
+###

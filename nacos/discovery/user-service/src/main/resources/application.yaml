@@ -1,0 +1,14 @@
+server:
+  port: ${random.int[10000,19999]}  # 服务器端口。默认为 8080
+#
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      # Nacos 作为注册中心的配置项
+      discovery:
+        # Nacos 服务器地址 "'lb://'+serviceId"
+        server-addr: 127.0.0.1:8848
+
+#
