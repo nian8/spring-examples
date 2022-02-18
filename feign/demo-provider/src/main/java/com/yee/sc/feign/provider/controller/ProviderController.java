@@ -1,6 +1,7 @@
 package com.yee.sc.feign.provider.controller;
 
 import com.yee.sc.feign.provider.api.ProviderService;
+import com.yee.sc.feign.provider.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,16 @@ public class ProviderController implements ProviderService {
         logger.info("[echo][被调用啦 name({})]", name);
 
         return serverPort + "-provider:" + name;
+    }
+
+    @Override
+    public UserDto getUser(UserDto userDto) {
+        return userDto;
+    }
+
+    @Override
+    public UserDto postUser(UserDto userDto) {
+        return userDto;
     }
 
 }
