@@ -36,6 +36,11 @@
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-httpclient</artifactId>
         </dependency>
+        <!-- 引入 Feign OkHttp 依赖 -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
         <!-- 引入 FeignDemoProvider API 包 -->
         <dependency>
             <groupId>com.yee.spring</groupId>
