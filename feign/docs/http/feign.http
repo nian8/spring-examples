@@ -1,3 +1,6 @@
+GET http://127.0.0.1:28080/baidu/home
+
+###
 GET http://127.0.0.1:28080/test_post_user?username=xxx&password=ooo
 Accept: application/json
 

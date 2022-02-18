@@ -1,5 +1,6 @@
 package com.yee.sc.feign.consumer.controller;
 
+import com.yee.sc.feign.consumer.feign.BaiduFeignClient;
 import com.yee.sc.feign.consumer.feign.DemoProviderFeignClient;
 import com.yee.sc.feign.provider.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,17 @@ import java.util.Map;
 public class ConsumerController {
 
     @Autowired
+    private BaiduFeignClient baiduFeignClient;
+
+    @Autowired
     private DemoProviderFeignClient demoProviderFeignClient;
+
+    @GetMapping("/baidu/home")
+    public String baiduHome() {
+        // 使用 Feign 调用接口
+        // 返回结果
+        return baiduFeignClient.home();
+    }
 
     @GetMapping("/hello")
     public String hello(String name) {
