@@ -30,5 +30,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
+        <!-- 引入 FeignDemoProvider API 包 -->
+        <dependency>
+            <groupId>com.yee.spring</groupId>
+            <artifactId>sc-feign-demo-provider-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
