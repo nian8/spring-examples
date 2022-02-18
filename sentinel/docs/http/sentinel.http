@@ -1,0 +1,18 @@
+GET http://127.0.0.1:8080/demo/annotations_demo
+
+###
+GET http://127.0.0.1:8080/demo/entry_demo
+
+###
+GET http://127.0.0.1:8080/demo/product_info?id=1
+
+###
+GET http://127.0.0.1:8080/demo/sleep
+
+###
+GET http://127.0.0.1:8080/demo/test
+
+###
+GET http://127.0.0.1:8080/demo/echo
+
+###
