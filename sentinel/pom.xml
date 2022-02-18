@@ -12,5 +12,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo-provider</module>
+        <module>feign-consumer</module>
     </modules>
 </project>

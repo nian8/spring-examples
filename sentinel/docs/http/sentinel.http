@@ -1,3 +1,6 @@
+GET http://127.0.0.1:8081/consumer/echo
+
+###
 GET http://127.0.0.1:8080/demo/annotations_demo
 
 ###
