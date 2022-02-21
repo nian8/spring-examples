@@ -14,6 +14,9 @@
         <module>gateway</module>
         <module>feign</module>
         <module>sentinel</module>
+        <!---->
+        <module>stream/rabbitmq</module>
+        <module>stream/kafka</module>
     </modules>
     <!-- ${basedir} 项目根目录 -->
     <!-- ${project.build.directory} 构建目录，缺省为target -->
