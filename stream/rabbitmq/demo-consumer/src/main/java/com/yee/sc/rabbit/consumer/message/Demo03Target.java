@@ -3,11 +3,11 @@ package com.yee.sc.rabbit.consumer.message;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface Demo01Target {
+public interface Demo03Target {
 
-    String DEMO_01_INPUT = "demo-01-input";
+    String DEMO_03_INPUT = "demo-03-input";
 
-    @Input(DEMO_01_INPUT)
+    @Input(DEMO_03_INPUT)
     SubscribableChannel getChannel();
 
 }

@@ -2,6 +2,7 @@ package com.yee.sc.rabbit.producer.controller;
 
 import com.yee.sc.rabbit.producer.message.Demo01Source;
 import com.yee.sc.rabbit.producer.message.Demo02Source;
+import com.yee.sc.rabbit.producer.message.Demo03Source;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class EchoController {
     private Demo01Source demo01Source;
     @Autowired
     private Demo02Source demo02Source;
+    @Autowired
+    private Demo03Source demo03Source;
 
     @GetMapping("/send")
     public boolean send() {
@@ -34,7 +37,7 @@ public class EchoController {
         Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
                 .build();
         // 发送消息
-        boolean sendResult = demo01Source.demo01Output().send(springMessage);
+        boolean sendResult = demo01Source.getChannel().send(springMessage);
         logger.info("[send][发送消息完成, 结果 = {}]", sendResult);
         return sendResult;
     }
@@ -52,7 +55,7 @@ public class EchoController {
                     .setHeader("tag", tag)
                     .build();
             // 发送消息
-            sendResult = demo01Source.demo01Output().send(springMessage);
+            sendResult = demo01Source.getChannel().send(springMessage);
             logger.info("[sendTag][发送消息完成, 结果 = {}]", sendResult);
         }
         return sendResult;
@@ -69,8 +72,22 @@ public class EchoController {
                 .setHeader("x-delay", 5000)
                 .build();
         // 发送消息
-        boolean sendResult = demo02Source.demo02Output().send(springMessage);
+        boolean sendResult = demo02Source.getChannel().send(springMessage);
         logger.info("[sendDelay][发送消息完成, 结果 = {}]", sendResult);
+        return sendResult;
+    }
+
+    @GetMapping("/send_retry")
+    public boolean sendRetry() {
+        // 创建 Message
+        EchoMessage message = new EchoMessage()
+                .setId(new Random().nextInt());
+        // 创建 Spring Message 对象
+        Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                .build();
+        // 发送消息
+        boolean sendResult = demo03Source.getChannel().send(springMessage);
+        logger.info("[sendRetry][发送消息完成, 结果 = {}]", sendResult);
         return sendResult;
     }
 

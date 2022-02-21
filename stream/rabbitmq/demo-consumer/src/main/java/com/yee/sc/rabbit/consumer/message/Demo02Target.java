@@ -8,6 +8,6 @@ public interface Demo02Target {
     String DEMO_02_INPUT = "demo-02-input";
 
     @Input(DEMO_02_INPUT)
-    SubscribableChannel demo02Input();
+    SubscribableChannel getChannel();
 
 }

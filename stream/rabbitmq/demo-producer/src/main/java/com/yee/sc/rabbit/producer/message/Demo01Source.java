@@ -8,6 +8,6 @@ public interface Demo01Source {
     String DEMO_01_OUTPUT = "demo-01-output";
 
     @Output(DEMO_01_OUTPUT)
-    MessageChannel demo01Output();
+    MessageChannel getChannel();
 
 }
