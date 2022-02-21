@@ -1,12 +1,13 @@
 package com.yee.sc.rabbit.producer.message;
 
-import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
-public interface MySource {
+public interface Demo02Source {
 
-    @Output("demo01-output")
-    MessageChannel demo01Output();
+    String DEMO_01_OUTPUT = "demo-02-output";
+
+    @Output(DEMO_01_OUTPUT)
+    MessageChannel demo02Output();
 
 }

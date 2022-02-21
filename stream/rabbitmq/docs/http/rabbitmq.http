@@ -1,3 +1,9 @@
-GET http://localhost:18080/demo01/send
+GET http://localhost:18080/echo/send_delay
+
+###
+GET http://localhost:18080/echo/send_tag
+
+###
+GET http://localhost:18080/echo/send
 
 ###

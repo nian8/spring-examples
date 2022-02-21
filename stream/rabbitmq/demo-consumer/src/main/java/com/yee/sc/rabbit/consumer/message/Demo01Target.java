@@ -1,13 +1,13 @@
-package com.yee.sc.rabbit.consumer.listener;
+package com.yee.sc.rabbit.consumer.message;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface MySink {
+public interface Demo01Target {
 
-    String DEMO01_INPUT = "demo01-input";
+    String DEMO_01_INPUT = "demo-01-input";
 
-    @Input(DEMO01_INPUT)
+    @Input(DEMO_01_INPUT)
     SubscribableChannel demo01Input();
 
 }

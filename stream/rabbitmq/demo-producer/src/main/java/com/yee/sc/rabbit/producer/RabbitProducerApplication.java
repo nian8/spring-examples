@@ -1,12 +1,13 @@
 package com.yee.sc.rabbit.producer;
 
-import com.yee.sc.rabbit.producer.message.MySource;
+import com.yee.sc.rabbit.producer.message.Demo01Source;
+import com.yee.sc.rabbit.producer.message.Demo02Source;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
 @SpringBootApplication
-@EnableBinding(MySource.class)
+@EnableBinding({Demo01Source.class, Demo02Source.class})
 public class RabbitProducerApplication {
 
     public static void main(String[] args) {

@@ -24,13 +24,25 @@ spring:
                 password: bitnami
       # Binding 配置项，对应 BindingProperties Map
       bindings:
-        demo01-output:
+        demo-01-output:
           # 目的地。这里使用 RabbitMQ Exchange
           destination: DEMO-TOPIC-01
           # 内容格式。这里使用 JSON
           content-type: application/json
           # 设置使用的 Binder 名字
           binder: rabbit001
+        demo-02-output:
+          destination: DEMO-TOPIC-02
+          content-type: application/json
+          binder: rabbit001
+      # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
+      rabbit:
+        bindings:
+          demo-02-output:
+            # RabbitMQ Producer 配置项，对应 RabbitProducerProperties 类
+            producer:
+              # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
+              delayed-exchange: true
 #
 server:
   port: 18080

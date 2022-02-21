@@ -1,16 +1,16 @@
-package com.yee.sc.rabbit.producer.message;
+package com.yee.sc.rabbit.consumer.message;
 
 /**
  * 示例 01 的 Message 消息
  */
-public class Demo01Message {
+public class EchoMessage {
 
     /**
      * 编号
      */
     private Integer id;
 
-    public Demo01Message setId(Integer id) {
+    public EchoMessage setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -21,7 +21,7 @@ public class Demo01Message {
 
     @Override
     public String toString() {
-        return "Demo01Message{" +
+        return "EchoMessage{" +
                 "id=" + id +
                 '}';
     }
