@@ -1,17 +1,17 @@
 package com.yee.sc.rabbit.producer;
 
-import com.yee.sc.rabbit.producer.message.Demo01Source;
-import com.yee.sc.rabbit.producer.message.Demo02Source;
-import com.yee.sc.rabbit.producer.message.Demo03Source;
-import com.yee.sc.rabbit.producer.message.Demo04Source;
+import com.yee.sc.rabbit.producer.binder.Demo01OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo02OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo03OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo04OutputBinder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
 @SpringBootApplication
 @EnableBinding({
-        Demo01Source.class, Demo02Source.class, Demo03Source.class,
-        Demo04Source.class
+        Demo01OutputBinder.class, Demo02OutputBinder.class, Demo03OutputBinder.class,
+        Demo04OutputBinder.class
 })
 public class RabbitProducerApplication {
 

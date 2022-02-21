@@ -1,9 +1,9 @@
 package com.yee.sc.rabbit.producer.controller;
 
-import com.yee.sc.rabbit.producer.message.Demo01Source;
-import com.yee.sc.rabbit.producer.message.Demo02Source;
-import com.yee.sc.rabbit.producer.message.Demo03Source;
-import com.yee.sc.rabbit.producer.message.Demo04Source;
+import com.yee.sc.rabbit.producer.binder.Demo01OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo02OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo03OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo04OutputBinder;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +23,13 @@ public class EchoController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private Demo01Source demo01Source;
+    private Demo01OutputBinder demo01OutputBinder;
     @Autowired
-    private Demo02Source demo02Source;
+    private Demo02OutputBinder demo02OutputBinder;
     @Autowired
-    private Demo03Source demo03Source;
+    private Demo03OutputBinder demo03OutputBinder;
     @Autowired
-    private Demo04Source demo04Source;
+    private Demo04OutputBinder demo04OutputBinder;
 
     @GetMapping("/send")
     public boolean sendSimple() {
@@ -40,9 +40,9 @@ public class EchoController {
         Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
                 .build();
         // 发送消息
-        boolean sendResult = demo01Source.getChannel().send(springMessage);
+        boolean sendResult = demo01OutputBinder.getChannel().send(springMessage);
         logger.info("[sendSimple][发送消息至 {} 完成, 结果 = {}]",
-                Demo01Source.BINDING_NAME,
+                Demo01OutputBinder.BINDING_NAME,
                 sendResult);
         return sendResult;
     }
@@ -60,9 +60,9 @@ public class EchoController {
                     .setHeader("tag", tag)
                     .build();
             // 发送消息
-            sendResult = demo01Source.getChannel().send(springMessage);
+            sendResult = demo01OutputBinder.getChannel().send(springMessage);
             logger.info("[sendTag][发送消息至 {} 完成, 结果 = {}]",
-                    Demo01Source.BINDING_NAME,
+                    Demo01OutputBinder.BINDING_NAME,
                     sendResult);
         }
         return sendResult;
@@ -79,9 +79,9 @@ public class EchoController {
                 .setHeader("x-delay", 5000)
                 .build();
         // 发送消息
-        boolean sendResult = demo02Source.getChannel().send(springMessage);
+        boolean sendResult = demo02OutputBinder.getChannel().send(springMessage);
         logger.info("[sendDelay][发送消息至 {} 完成, 结果 = {}]",
-                Demo03Source.BINDING_NAME,
+                Demo03OutputBinder.BINDING_NAME,
                 sendResult);
         return sendResult;
     }
@@ -95,9 +95,9 @@ public class EchoController {
         Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
                 .build();
         // 发送消息
-        boolean sendResult = demo03Source.getChannel().send(springMessage);
+        boolean sendResult = demo03OutputBinder.getChannel().send(springMessage);
         logger.info("[sendRetry][发送消息至 {} 完成, 结果 = {}]",
-                Demo03Source.BINDING_NAME,
+                Demo03OutputBinder.BINDING_NAME,
                 sendResult);
         return sendResult;
     }
@@ -111,9 +111,9 @@ public class EchoController {
         Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
                 .build();
         // 发送消息
-        boolean sendResult = demo04Source.getChannel().send(springMessage);
+        boolean sendResult = demo04OutputBinder.getChannel().send(springMessage);
         logger.info("[sendBroadcast][发送消息至 {} 完成, 结果 = {}]",
-                Demo04Source.BINDING_NAME,
+                Demo04OutputBinder.BINDING_NAME,
                 sendResult);
         return sendResult;
     }

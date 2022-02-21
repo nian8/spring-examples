@@ -1,6 +1,6 @@
 package com.yee.sc.rabbit.consumer.listener;
 
-import com.yee.sc.rabbit.consumer.message.Demo02Target;
+import com.yee.sc.rabbit.consumer.binder.Demo02InputBinder;
 import com.yee.sc.rabbit.consumer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +13,11 @@ public class Demo02Consumer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @StreamListener(Demo02Target.BINDING_NAME)
+    @StreamListener(Demo02InputBinder.BINDING_NAME)
     public void onMessage(@Payload EchoMessage message) {
         logger.info("[onMessage][线程编号:{} 消息主题:{} 消息标签: {} 消息内容: {}]",
                 Thread.currentThread().getId(),
-                Demo02Target.BINDING_NAME,
+                Demo02InputBinder.BINDING_NAME,
                 "",
                 message);
     }

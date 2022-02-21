@@ -1,17 +1,17 @@
 package com.yee.sc.rabbit.consumer;
 
-import com.yee.sc.rabbit.consumer.message.Demo01Target;
-import com.yee.sc.rabbit.consumer.message.Demo02Target;
-import com.yee.sc.rabbit.consumer.message.Demo03Target;
-import com.yee.sc.rabbit.consumer.message.Demo04Target;
+import com.yee.sc.rabbit.consumer.binder.Demo01InputBinder;
+import com.yee.sc.rabbit.consumer.binder.Demo02InputBinder;
+import com.yee.sc.rabbit.consumer.binder.Demo03InputBinder;
+import com.yee.sc.rabbit.consumer.binder.Demo04InputBinder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
 @SpringBootApplication
 @EnableBinding({
-        Demo01Target.class, Demo02Target.class, Demo03Target.class,
-        Demo04Target.class
+        Demo01InputBinder.class, Demo02InputBinder.class, Demo03InputBinder.class,
+        Demo04InputBinder.class
 })
 public class RabbitConsumerApplication {
 

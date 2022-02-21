@@ -1,6 +1,6 @@
 package com.yee.sc.rabbit.consumer.listener;
 
-import com.yee.sc.rabbit.consumer.message.Demo03Target;
+import com.yee.sc.rabbit.consumer.binder.Demo03InputBinder;
 import com.yee.sc.rabbit.consumer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +15,11 @@ public class Demo03Consumer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @StreamListener(Demo03Target.BINDING_NAME)
+    @StreamListener(Demo03InputBinder.BINDING_NAME)
     public void onMessage(@Payload EchoMessage message) {
         logger.info("[onMessage][线程编号:{} 消息主题:{} 消息标签: {} 消息内容: {}]",
                 Thread.currentThread().getId(),
-                Demo03Target.BINDING_NAME,
+                Demo03InputBinder.BINDING_NAME,
                 "",
                 message);
         // <X> 注意，此处抛出一个 RuntimeException 异常，模拟消费失败
