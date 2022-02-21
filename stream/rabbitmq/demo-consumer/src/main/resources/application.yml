@@ -33,6 +33,10 @@ spring:
           group: demo-consumer-group-DEMO-TOPIC-01
           # 设置使用的 Binder 名字
           binder: rabbit001
+          # Consumer 配置项，对应 ConsumerProperties 类
+          consumer:
+            # 每个 Consumer 消费线程数的初始大小，默认为 1
+            concurrency: 2
         demo-02-input:
           destination: DEMO-TOPIC-02
           content-type: application/json
@@ -62,13 +66,15 @@ spring:
       rabbit:
         # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
         bindings:
-          demo-02-input:
+          demo-01-input:
             # RabbitMQ Consumer 配置项，对应 RabbitConsumerProperties 类
+            consumer:
+              max-concurrency: 10 # 每个 Consumer 消费线程数的最大大小，默认为 1
+          demo-02-input:
             consumer:
               # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
               delayed-exchange: true
           demo-03-input:
-            # RabbitMQ Consumer 配置项，对应 RabbitConsumerProperties 类
             consumer:
               # 是否创建对应的死信队列，并进行绑定，默认为 false。
               auto-bind-dlq: true
