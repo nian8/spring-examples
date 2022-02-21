@@ -39,6 +39,10 @@ spring:
           destination: DEMO-TOPIC-03
           content-type: application/json
           binder: rabbit001
+        demo-04-output:
+          destination: DEMO-TOPIC-04
+          content-type: application/json
+          binder: rabbit001
       # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
       rabbit:
         bindings:

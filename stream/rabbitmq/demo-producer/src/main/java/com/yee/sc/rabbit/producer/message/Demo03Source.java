@@ -5,9 +5,9 @@ import org.springframework.messaging.MessageChannel;
 
 public interface Demo03Source {
 
-    String DEMO_03_OUTPUT = "demo-03-output";
+    String BINDING_NAME = "demo-03-output";
 
-    @Output(DEMO_03_OUTPUT)
+    @Output(BINDING_NAME)
     MessageChannel getChannel();
 
 }

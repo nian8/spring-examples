@@ -3,6 +3,7 @@ package com.yee.sc.rabbit.producer.controller;
 import com.yee.sc.rabbit.producer.message.Demo01Source;
 import com.yee.sc.rabbit.producer.message.Demo02Source;
 import com.yee.sc.rabbit.producer.message.Demo03Source;
+import com.yee.sc.rabbit.producer.message.Demo04Source;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +28,11 @@ public class EchoController {
     private Demo02Source demo02Source;
     @Autowired
     private Demo03Source demo03Source;
+    @Autowired
+    private Demo04Source demo04Source;
 
     @GetMapping("/send")
-    public boolean send() {
+    public boolean sendSimple() {
         // 创建 Message
         EchoMessage message = new EchoMessage()
                 .setId(new Random().nextInt());
@@ -38,7 +41,9 @@ public class EchoController {
                 .build();
         // 发送消息
         boolean sendResult = demo01Source.getChannel().send(springMessage);
-        logger.info("[send][发送消息完成, 结果 = {}]", sendResult);
+        logger.info("[sendSimple][发送消息至 {} 完成, 结果 = {}]",
+                Demo01Source.BINDING_NAME,
+                sendResult);
         return sendResult;
     }
 
@@ -56,7 +61,9 @@ public class EchoController {
                     .build();
             // 发送消息
             sendResult = demo01Source.getChannel().send(springMessage);
-            logger.info("[sendTag][发送消息完成, 结果 = {}]", sendResult);
+            logger.info("[sendTag][发送消息至 {} 完成, 结果 = {}]",
+                    Demo01Source.BINDING_NAME,
+                    sendResult);
         }
         return sendResult;
     }
@@ -73,7 +80,9 @@ public class EchoController {
                 .build();
         // 发送消息
         boolean sendResult = demo02Source.getChannel().send(springMessage);
-        logger.info("[sendDelay][发送消息完成, 结果 = {}]", sendResult);
+        logger.info("[sendDelay][发送消息至 {} 完成, 结果 = {}]",
+                Demo03Source.BINDING_NAME,
+                sendResult);
         return sendResult;
     }
 
@@ -87,7 +96,25 @@ public class EchoController {
                 .build();
         // 发送消息
         boolean sendResult = demo03Source.getChannel().send(springMessage);
-        logger.info("[sendRetry][发送消息完成, 结果 = {}]", sendResult);
+        logger.info("[sendRetry][发送消息至 {} 完成, 结果 = {}]",
+                Demo03Source.BINDING_NAME,
+                sendResult);
+        return sendResult;
+    }
+
+    @GetMapping("/send_broadcast")
+    public boolean sendBroadcast() {
+        // 创建 Message
+        EchoMessage message = new EchoMessage()
+                .setId(new Random().nextInt());
+        // 创建 Spring Message 对象
+        Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                .build();
+        // 发送消息
+        boolean sendResult = demo04Source.getChannel().send(springMessage);
+        logger.info("[sendBroadcast][发送消息至 {} 完成, 结果 = {}]",
+                Demo04Source.BINDING_NAME,
+                sendResult);
         return sendResult;
     }
 

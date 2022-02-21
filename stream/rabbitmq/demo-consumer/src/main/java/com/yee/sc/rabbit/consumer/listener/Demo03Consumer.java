@@ -15,10 +15,11 @@ public class Demo03Consumer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @StreamListener(Demo03Target.DEMO_03_INPUT)
+    @StreamListener(Demo03Target.BINDING_NAME)
     public void onMessage(@Payload EchoMessage message) {
-        logger.info("[onMessage][线程编号:{} 消息标签: {} 消息内容: {}]",
+        logger.info("[onMessage][线程编号:{} 消息主题:{} 消息标签: {} 消息内容: {}]",
                 Thread.currentThread().getId(),
+                Demo03Target.BINDING_NAME,
                 "",
                 message);
         // <X> 注意，此处抛出一个 RuntimeException 异常，模拟消费失败

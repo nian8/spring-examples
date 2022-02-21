@@ -5,9 +5,9 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface Demo01Target {
 
-    String DEMO_01_INPUT = "demo-01-input";
+    String BINDING_NAME = "demo-01-input";
 
-    @Input(DEMO_01_INPUT)
+    @Input(BINDING_NAME)
     SubscribableChannel getChannel();
 
 }

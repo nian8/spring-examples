@@ -13,10 +13,11 @@ public class Demo02Consumer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @StreamListener(Demo02Target.DEMO_02_INPUT)
+    @StreamListener(Demo02Target.BINDING_NAME)
     public void onMessage(@Payload EchoMessage message) {
-        logger.info("[onMessage][线程编号:{} 消息标签: {} 消息内容: {}]",
+        logger.info("[onMessage][线程编号:{} 消息主题:{} 消息标签: {} 消息内容: {}]",
                 Thread.currentThread().getId(),
+                Demo02Target.BINDING_NAME,
                 "",
                 message);
     }
