@@ -26,12 +26,11 @@ spring:
           # 内容格式。这里使用 JSON
           content-type: application/json
           # 消费者分组
-          group: demo-consumer-group-DEMO-TOPIC-01
-#        demo-02-input:
-#          destination: DEMO-TOPIC-02
-#          content-type: application/json
-#          group: demo-consumer-group-DEMO-TOPIC-02
-#          binder: rabbit001
+          group: demo-consumer-group-DEMO-TOPIC-01-1
+        demo-02-input:
+          destination: DEMO-TOPIC-01
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-01-2
 #        demo-03-input:
 #          destination: DEMO-TOPIC-03
 #          content-type: application/json
