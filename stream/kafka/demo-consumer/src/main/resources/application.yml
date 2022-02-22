@@ -1,0 +1,146 @@
+spring:
+  application:
+    name: rabbit-demo-consumer
+  # RabbitMQ 配置项，则对应的是 RabbitProperties 类
+  rabbitmq:
+    # RabbitMQ 服务的地址
+    host: 127.0.0.1
+    # RabbitMQ 服务的端口
+    port: 5672
+    # RabbitMQ 服务的账号
+    username: user
+    # RabbitMQ 服务的密码
+    password: bitnami
+  cloud:
+    # Spring Cloud Stream 配置项，对应 BindingServiceProperties 类
+    stream:
+      # Binder 配置项，对应 BinderProperties Map
+      binders:
+        rabbit001:
+          # 设置 Binder 的类型
+          type: rabbit
+          # 设置 Binder 的环境配置
+          environment:
+            # 如果是 RabbitMQ 类型的时候，则对应的是 RabbitProperties 类
+            spring:
+              rabbitmq:
+                host: ${spring.rabbitmq.host}
+                port: ${spring.rabbitmq.port}
+                username: ${spring.rabbitmq.username}
+                password: ${spring.rabbitmq.password}
+      # Binding 配置项，对应 BindingProperties Map
+      bindings:
+        demo-01-input:
+          # 目的地。这里使用 RabbitMQ Exchange
+          destination: DEMO-TOPIC-01
+          # 内容格式。这里使用 JSON
+          content-type: application/json
+          # 消费者分组
+          group: demo-consumer-group-DEMO-TOPIC-01
+          # 设置使用的 Binder 名字
+          binder: rabbit001
+          # Consumer 配置项，对应 ConsumerProperties 类
+          consumer:
+            # 每个 Consumer 消费线程数的初始大小，默认为 1
+            concurrency: 2
+        demo-02-input:
+          destination: DEMO-TOPIC-02
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-02
+          binder: rabbit001
+        demo-03-input:
+          destination: DEMO-TOPIC-03
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-03
+          binder: rabbit001
+          # Consumer 配置项，对应 ConsumerProperties 类
+          consumer:
+            # 重试次数，默认为 3 次。
+            max-attempts: 3
+            # 重试间隔的初始值，单位毫秒，默认为 1000
+            back-off-initial-interval: 3000
+            # 重试间隔的递乘系数，默认为 2.0
+            back-off-multiplier: 2.0
+            # 重试间隔的最大值，单位毫秒，默认为 10000
+            back-off-max-interval: 10000
+        demo-04-input:
+          destination: DEMO-TOPIC-04
+          content-type: application/json
+          # 消费分组为空时，该 Consumer 生成一个独有且自动删除的 Queue，从而实现广播消费的功能。
+#          group: demo-consumer-group-DEMO-TOPIC-04
+          binder: rabbit001
+        demo-05-input:
+          destination: DEMO-TOPIC-05
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-05
+          binder: rabbit001
+          # Consumer 配置项，对应 ConsumerProperties 类
+          consumer:
+            # 是否消费来自队列分区的消息，默认为 false
+            partitioned: true
+            # 消费来自哪个分区的消息，默认为 -1
+            instance-index: ${CONSUMER_INSTANCE_INDEX}
+        demo-06-input:
+          destination: DEMO-TOPIC-06
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-06
+          binder: rabbit001
+        demo-07-input:
+          destination: DEMO-TOPIC-07
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-07
+          binder: rabbit001
+        demo-08-input:
+          destination: DEMO-TOPIC-08
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-08
+          binder: rabbit001
+        demo-09-input:
+          destination: DEMO-TOPIC-09
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-09
+          binder: rabbit001
+        demo-10-input:
+          destination: DEMO-TOPIC-10
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-10
+          binder: rabbit001
+          consumer:
+            # 是否批量消费默认，默认为 false
+            batch-mode: true
+      rabbit:
+        # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
+        bindings:
+          demo-01-input:
+            # RabbitMQ Consumer 配置项，对应 RabbitConsumerProperties 类
+            consumer:
+              max-concurrency: 10 # 每个 Consumer 消费线程数的最大大小，默认为 1
+          demo-02-input:
+            consumer:
+              # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
+              delayed-exchange: true
+          demo-03-input:
+            consumer:
+              # 是否创建对应的死信队列，并进行绑定，默认为 false。
+              auto-bind-dlq: true
+              # 消费失败的消息发布到对应的死信队列时，是否添加异常异常的信息到消息头
+              republish-to-dlq: true
+          demo-08-input:
+            consumer:
+              # 消费消息的确认模式，默认为 AUTO 自动确认
+              acknowledge-mode: MANUAL
+#
+server:
+  port: ${random.int[10000,19999]} # 随机端口，方便启动多个消费者
+#
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 需要开放的端点。默认值只打开 health 和 info 两个端点。通过设置 * ，可以开放所有端点。
+  endpoint:
+    # Health 端点配置项，对应 HealthProperties 配置类
+    health:
+      enabled: true # 是否开启。默认为 true 开启。
+      show-details: ALWAYS # 何时显示完整的健康信息。默认为 NEVER 都不展示。可选 WHEN_AUTHORIZED 当经过授权的用户；可选 ALWAYS 总是展示。
+#
