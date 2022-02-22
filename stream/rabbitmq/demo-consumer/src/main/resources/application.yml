@@ -89,6 +89,11 @@ spring:
           content-type: application/json
           group: demo-consumer-group-DEMO-TOPIC-08
           binder: rabbit001
+        demo-09-input:
+          destination: DEMO-TOPIC-09
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-09
+          binder: rabbit001
       rabbit:
         # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
         bindings:

@@ -1,3 +1,6 @@
+GET http://localhost:18080/echo/send_confirm
+
+###
 GET http://localhost:18080/echo/send_ack
 
 ###
