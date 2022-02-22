@@ -226,7 +226,7 @@ public class EchoController {
     public boolean sendBatch() throws InterruptedException {
         boolean sendResult = false;
         // 发送 10 条消息，每条中间间隔 10 秒
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             // 创建 Message
             EchoMessage message = new EchoMessage()
                     .setId(new Random().nextInt());
