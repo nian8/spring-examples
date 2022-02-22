@@ -56,6 +56,10 @@ spring:
             partition-count: 2
             # 发送到的消费者分组，默认为空
 #            required-groups: demo-consumer-group-DEMO-TOPIC-05
+        demo-06-output:
+          destination: DEMO-TOPIC-06
+          content-type: application/json
+          binder: rabbit001
       # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
       rabbit:
         bindings:

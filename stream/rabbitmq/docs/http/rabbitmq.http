@@ -1,3 +1,6 @@
+GET http://localhost:18080/echo/send_tag
+
+###
 GET http://127.0.0.1:18080/echo/send_orderly
 
 ###
@@ -8,9 +11,6 @@ GET http://localhost:18080/echo/send_retry
 
 ###
 GET http://localhost:18080/echo/send_delay
-
-###
-GET http://localhost:18080/echo/send_tag
 
 ###
 GET http://localhost:18080/echo/send

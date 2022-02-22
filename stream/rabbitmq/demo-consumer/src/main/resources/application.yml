@@ -74,6 +74,11 @@ spring:
             partitioned: true
             # 消费来自哪个分区的消息，默认为 -1
             instance-index: ${CONSUMER_INSTANCE_INDEX}
+        demo-06-input:
+          destination: DEMO-TOPIC-06
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-06
+          binder: rabbit001
       rabbit:
         # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
         bindings:

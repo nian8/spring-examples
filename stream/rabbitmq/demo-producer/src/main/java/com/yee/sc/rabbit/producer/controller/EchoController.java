@@ -5,6 +5,7 @@ import com.yee.sc.rabbit.producer.binder.Demo02OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo03OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo04OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo05OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo06OutputBinder;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,27 +40,6 @@ public class EchoController {
         logger.info("[sendSimple][发送消息至 {} 完成, 结果 = {}]",
                 Demo01OutputBinder.BINDING_NAME,
                 sendResult);
-        return sendResult;
-    }
-
-    @GetMapping("/send_tag")
-    public boolean sendTag() {
-        boolean sendResult = false;
-        for (String tag : new String[]{"yunai", "yutou", "tudou"}) {
-            // 创建 Message
-            EchoMessage message = new EchoMessage()
-                    .setId(new Random().nextInt());
-            // 创建 Spring Message 对象
-            Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
-                    // 设置 Tag
-                    .setHeader("tag", tag)
-                    .build();
-            // 发送消息
-            sendResult = demo01OutputBinder.getChannel().send(springMessage);
-            logger.info("[sendTag][发送消息至 {} 完成, 结果 = {}]",
-                    Demo01OutputBinder.BINDING_NAME,
-                    sendResult);
-        }
         return sendResult;
     }
 
@@ -144,4 +124,29 @@ public class EchoController {
         }
         return sendResult;
     }
+
+    @Autowired
+    private Demo06OutputBinder demo06OutputBinder;
+
+    @GetMapping("/send_tag")
+    public boolean sendTag() {
+        boolean sendResult = false;
+        for (String tag : new String[]{"yunai", "yutou", "tudou"}) {
+            // 创建 Message
+            EchoMessage message = new EchoMessage()
+                    .setId(new Random().nextInt());
+            // 创建 Spring Message 对象
+            Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                    // 设置 Tag
+                    .setHeader("tag", tag)
+                    .build();
+            // 发送消息
+            sendResult = demo06OutputBinder.getChannel().send(springMessage);
+            logger.info("[sendTag][发送消息至 {} 完成, 结果 = {}]",
+                    Demo06OutputBinder.BINDING_NAME,
+                    sendResult);
+        }
+        return sendResult;
+    }
+
 }
