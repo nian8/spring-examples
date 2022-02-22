@@ -1,7 +1,7 @@
 package com.yee.sc.kafka.consumer.listener;
 
-import com.yee.sc.kafka.consumer.binder.Demo03InputBinder;
 import com.yee.sc.kafka.common.message.EchoMessage;
+import com.yee.sc.kafka.consumer.binder.Demo03InputBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.StreamListener;

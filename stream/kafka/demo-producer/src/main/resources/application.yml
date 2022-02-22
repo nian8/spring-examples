@@ -9,34 +9,11 @@ spring:
     stream:
       # Binder 配置项，对应 BinderProperties Map
 #      binders:
-#        rabbit001:
+#        kafka001:
 #          # 设置 Binder 的类型
-#          type: rabbit
+#          type: kafka
 #          # 设置 Binder 的环境配置
 #          environment:
-#            # 如果是 RabbitMQ 类型的时候，则对应的是 RabbitProperties 类
-#            spring:
-#              rabbitmq:
-#                host: ${spring.rabbitmq.host}
-#                port: ${spring.rabbitmq.port}
-#                username: ${spring.rabbitmq.username}
-#                password: ${spring.rabbitmq.password}
-#        rabbit002:
-#          # 设置 Binder 的类型
-#          type: rabbit
-#          # 设置 Binder 的环境配置
-#          environment:
-#            # 如果是 RabbitMQ 类型的时候，则对应的是 RabbitProperties 类
-#            spring:
-#              rabbitmq:
-#                host: ${spring.rabbitmq.host}
-#                port: ${spring.rabbitmq.port}
-#                username: ${spring.rabbitmq.username}
-#                password: ${spring.rabbitmq.password}
-#                # 设置消息是否回退，默认为 false
-#                publisher-returns: true
-#                # 设置开启消息确认模型，默认为 null 不进行确认
-#                publisher-confirm-type: simple
       # Binding 配置项，对应 BindingProperties Map
       bindings:
         demo-01-output:
@@ -44,14 +21,12 @@ spring:
           destination: DEMO-TOPIC-01
           # 内容格式。这里使用 JSON
           content-type: application/json
-#        demo-02-output:
-#          destination: DEMO-TOPIC-02
-#          content-type: application/json
-#          binder: rabbit001
-#        demo-03-output:
-#          destination: DEMO-TOPIC-03
-#          content-type: application/json
-#          binder: rabbit001
+        demo-02-output:
+          destination: DEMO-TOPIC-02
+          content-type: application/json
+        demo-03-output:
+          destination: DEMO-TOPIC-03
+          content-type: application/json
 #        demo-04-output:
 #          destination: DEMO-TOPIC-04
 #          content-type: application/json
