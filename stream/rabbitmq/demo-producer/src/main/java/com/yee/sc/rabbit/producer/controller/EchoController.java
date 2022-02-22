@@ -10,7 +10,7 @@ import com.yee.sc.rabbit.producer.binder.Demo07OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo08OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo09OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo10OutputBinder;
-import com.yee.sc.rabbit.producer.message.EchoMessage;
+import com.yee.sc.rabbit.common.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

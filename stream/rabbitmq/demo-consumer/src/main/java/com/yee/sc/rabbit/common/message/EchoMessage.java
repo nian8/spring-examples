@@ -1,4 +1,4 @@
-package com.yee.sc.rabbit.producer.message;
+package com.yee.sc.rabbit.common.message;
 
 import java.io.Serializable;
 
