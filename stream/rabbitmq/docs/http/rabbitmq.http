@@ -1,3 +1,15 @@
+GET http://127.0.0.1:18080/actuator/health
+Accept: application/json
+
+###
+GET http://127.0.0.1:18080/actuator/channels
+Accept: application/json
+
+###
+GET http://127.0.0.1:18080/actuator/bindings
+Accept: application/json
+
+###
 GET http://localhost:18080/echo/send_batch
 
 ###
