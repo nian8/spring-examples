@@ -7,6 +7,7 @@ import com.yee.sc.rabbit.producer.binder.Demo04OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo05OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo06OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo07OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo08OutputBinder;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -173,6 +174,26 @@ public class EchoController {
                 sendResult);
         // <X> 等待
         Thread.sleep(3 * 1000L);
+        return sendResult;
+    }
+
+    @Autowired
+    private Demo08OutputBinder demo08OutputBinder;
+
+    @GetMapping("/send_ack")
+    public boolean sendAck() {
+        // 创建 Message
+        EchoMessage message = new EchoMessage()
+                .setId(new Random().nextInt());
+        // 创建 Spring Message 对象
+        Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                .build();
+        // 发送消息
+        boolean sendResult = demo08OutputBinder.getChannel().send(springMessage);
+        logger.info("[sendAck][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
+                message.getId(),
+                Demo08OutputBinder.BINDING_NAME,
+                sendResult);
         return sendResult;
     }
 

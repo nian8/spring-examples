@@ -84,6 +84,11 @@ spring:
           content-type: application/json
           group: demo-consumer-group-DEMO-TOPIC-07
           binder: rabbit001
+        demo-08-input:
+          destination: DEMO-TOPIC-08
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-08
+          binder: rabbit001
       rabbit:
         # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
         bindings:
@@ -101,6 +106,10 @@ spring:
               auto-bind-dlq: true
               # 消费失败的消息发布到对应的死信队列时，是否添加异常异常的信息到消息头
               republish-to-dlq: true
+          demo-08-input:
+            consumer:
+              # 消费消息的确认模式，默认为 AUTO 自动确认
+              acknowledge-mode: MANUAL
 #
 server:
   port: ${random.int[10000,19999]} # 随机端口，方便启动多个消费者
