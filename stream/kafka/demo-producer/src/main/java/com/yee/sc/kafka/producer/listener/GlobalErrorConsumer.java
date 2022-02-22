@@ -7,7 +7,7 @@ import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class GlobalErrorConsumer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -18,7 +18,7 @@ public class GlobalErrorConsumer {
      *
      * @param errorMessage
      */
-    @StreamListener(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME)
+//    @StreamListener(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME)
     public void handleError(ErrorMessage errorMessage) {
         logger.error("[global][HandleError][payload：{}]", errorMessage.getPayload().getMessage());
         logger.error("[global][HandleError][originalMessage：{}]", errorMessage.getOriginalMessage());

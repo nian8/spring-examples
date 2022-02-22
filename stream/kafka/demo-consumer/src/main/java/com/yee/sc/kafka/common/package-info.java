@@ -1,1 +1,1 @@
-package com.yee.sc.rabbit.common;
+package com.yee.sc.kafka.common;
