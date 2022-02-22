@@ -1,6 +1,16 @@
 spring:
   application:
     name: demo-producer-application
+  # RabbitMQ 配置项，则对应的是 RabbitProperties 类
+  rabbitmq:
+    # RabbitMQ 服务的地址
+    host: 127.0.0.1
+    # RabbitMQ 服务的端口
+    port: 5672
+    # RabbitMQ 服务的账号
+    username: user
+    # RabbitMQ 服务的密码
+    password: bitnami
   cloud:
     # Spring Cloud Stream 配置项，对应 BindingServiceProperties 类
     stream:
@@ -14,14 +24,10 @@ spring:
             # 如果是 RabbitMQ 类型的时候，则对应的是 RabbitProperties 类
             spring:
               rabbitmq:
-                # RabbitMQ 服务的地址
-                host: 127.0.0.1
-                # RabbitMQ 服务的端口
-                port: 5672
-                # RabbitMQ 服务的账号
-                username: user
-                # RabbitMQ 服务的密码
-                password: bitnami
+                host: ${spring.rabbitmq.host}
+                port: ${spring.rabbitmq.port}
+                username: ${spring.rabbitmq.username}
+                password: ${spring.rabbitmq.password}
       # Binding 配置项，对应 BindingProperties Map
       bindings:
         demo-01-output:
@@ -60,6 +66,10 @@ spring:
           destination: DEMO-TOPIC-06
           content-type: application/json
           binder: rabbit001
+        demo-07-output:
+          destination: DEMO-TOPIC-07
+          content-type: application/json
+          binder: rabbit001
       # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
       rabbit:
         bindings:
@@ -68,6 +78,10 @@ spring:
             producer:
               # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
               delayed-exchange: true
+          demo-07-output:
+            producer:
+              # 是否开启事务功能，默认为 false
+              transacted: true
 #
 server:
   port: 18080

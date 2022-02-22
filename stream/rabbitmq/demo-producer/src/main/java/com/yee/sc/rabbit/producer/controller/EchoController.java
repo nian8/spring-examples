@@ -6,12 +6,14 @@ import com.yee.sc.rabbit.producer.binder.Demo03OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo04OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo05OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo06OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo07OutputBinder;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -146,6 +148,31 @@ public class EchoController {
                     Demo06OutputBinder.BINDING_NAME,
                     sendResult);
         }
+        return sendResult;
+    }
+
+    @Autowired
+    private Demo07OutputBinder demo07OutputBinder;
+
+    @Transactional(transactionManager = "rabbitTransactionManager",
+            rollbackFor = Exception.class)
+    @GetMapping("/send_transaction")
+    public boolean sendTransaction() throws InterruptedException {
+        // 创建 Message
+        int id = new Random().nextInt();
+        EchoMessage message = new EchoMessage()
+                .setId(id);
+        // 创建 Spring Message 对象
+        Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                .build();
+        // 发送消息
+        boolean sendResult = demo07OutputBinder.getChannel().send(springMessage);
+        logger.info("[syncSend][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
+                id,
+                Demo07OutputBinder.BINDING_NAME,
+                sendResult);
+        // <X> 等待
+        Thread.sleep(3 * 1000L);
         return sendResult;
     }
 
