@@ -63,6 +63,17 @@ spring:
           # 消费分组为空时，该 Consumer 生成一个独有且自动删除的 Queue，从而实现广播消费的功能。
 #          group: demo-consumer-group-DEMO-TOPIC-04
           binder: rabbit001
+        demo-05-input:
+          destination: DEMO-TOPIC-05
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-05
+          binder: rabbit001
+          # Consumer 配置项，对应 ConsumerProperties 类
+          consumer:
+            # 是否消费来自队列分区的消息，默认为 false
+            partitioned: true
+            # 消费来自哪个分区的消息，默认为 -1
+            instance-index: ${CONSUMER_INSTANCE_INDEX}
       rabbit:
         # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
         bindings:

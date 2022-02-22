@@ -4,6 +4,7 @@ import com.yee.sc.rabbit.producer.binder.Demo01OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo02OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo03OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo04OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo05OutputBinder;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +25,6 @@ public class EchoController {
 
     @Autowired
     private Demo01OutputBinder demo01OutputBinder;
-    @Autowired
-    private Demo02OutputBinder demo02OutputBinder;
-    @Autowired
-    private Demo03OutputBinder demo03OutputBinder;
-    @Autowired
-    private Demo04OutputBinder demo04OutputBinder;
 
     @GetMapping("/send")
     public boolean sendSimple() {
@@ -68,6 +63,9 @@ public class EchoController {
         return sendResult;
     }
 
+    @Autowired
+    private Demo02OutputBinder demo02OutputBinder;
+
     @GetMapping("/send_delay")
     public boolean sendDelay() {
         // 创建 Message
@@ -86,6 +84,9 @@ public class EchoController {
         return sendResult;
     }
 
+    @Autowired
+    private Demo03OutputBinder demo03OutputBinder;
+
     @GetMapping("/send_retry")
     public boolean sendRetry() {
         // 创建 Message
@@ -101,6 +102,9 @@ public class EchoController {
                 sendResult);
         return sendResult;
     }
+
+    @Autowired
+    private Demo04OutputBinder demo04OutputBinder;
 
     @GetMapping("/send_broadcast")
     public boolean sendBroadcast() {
@@ -118,4 +122,26 @@ public class EchoController {
         return sendResult;
     }
 
+    @Autowired
+    private Demo05OutputBinder demo05OutputBinder;
+
+    @GetMapping("/send_orderly")
+    public boolean sendOrderly() {
+        boolean sendResult = false;
+        // 发送 3 条相同 id 的消息
+        int id = new Random().nextInt();
+        for (int i = 0; i < 3; i++) {
+            // 创建 Message
+            EchoMessage message = new EchoMessage().setId(id);
+            // 创建 Spring Message 对象
+            Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                    .build();
+            // 发送消息
+            sendResult = demo05OutputBinder.getChannel().send(springMessage);
+            logger.info("[sendOrderly][发送消息至 {} 完成, 结果 = {}]",
+                    Demo05OutputBinder.BINDING_NAME,
+                    sendResult);
+        }
+        return sendResult;
+    }
 }
