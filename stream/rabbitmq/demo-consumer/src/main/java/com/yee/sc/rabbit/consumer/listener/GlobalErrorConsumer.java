@@ -8,20 +8,21 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ErrorConsumer {
+public class GlobalErrorConsumer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 全局异常处理：通过订阅全局错误 Channel
+     * errorChannel
      *
      * @param errorMessage
      */
-    @StreamListener(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME) // errorChannel
-    public void globalHandleError(ErrorMessage errorMessage) {
-        logger.error("[globalHandleError][payload：{}]", errorMessage.getPayload().getMessage());
-        logger.error("[globalHandleError][originalMessage：{}]", errorMessage.getOriginalMessage());
-        logger.error("[globalHandleError][headers：{}]", errorMessage.getHeaders());
+    @StreamListener(IntegrationContextUtils.ERROR_CHANNEL_BEAN_NAME)
+    public void handleError(ErrorMessage errorMessage) {
+        logger.error("[global][HandleError][payload：{}]", errorMessage.getPayload().getMessage());
+        logger.error("[global][HandleError][originalMessage：{}]", errorMessage.getOriginalMessage());
+        logger.error("[global][HandleError][headers：{}]", errorMessage.getHeaders());
     }
 
 }

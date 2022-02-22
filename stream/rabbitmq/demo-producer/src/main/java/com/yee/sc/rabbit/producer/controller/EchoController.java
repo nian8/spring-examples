@@ -9,6 +9,7 @@ import com.yee.sc.rabbit.producer.binder.Demo06OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo07OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo08OutputBinder;
 import com.yee.sc.rabbit.producer.binder.Demo09OutputBinder;
+import com.yee.sc.rabbit.producer.binder.Demo10OutputBinder;
 import com.yee.sc.rabbit.producer.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -215,6 +216,33 @@ public class EchoController {
                 message.getId(),
                 Demo09OutputBinder.BINDING_NAME,
                 sendResult);
+        return sendResult;
+    }
+
+    @Autowired
+    private Demo10OutputBinder demo10OutputBinder;
+
+    @GetMapping("/send_batch")
+    public boolean sendBatch() throws InterruptedException {
+        boolean sendResult = false;
+        // 发送 10 条消息，每条中间间隔 10 秒
+        for (int i = 0; i < 10; i++) {
+            // 创建 Message
+            EchoMessage message = new EchoMessage()
+                    .setId(new Random().nextInt());
+            // 创建 Spring Message 对象
+            Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
+                    .build();
+            // 发送消息
+            sendResult = demo10OutputBinder.getChannel().send(springMessage);
+
+            // 故意每条消息之间，隔离 10 秒
+            logger.info("[sendBatch][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
+                    message.getId(),
+                    Demo10OutputBinder.BINDING_NAME,
+                    sendResult);
+            Thread.sleep(1000L);
+        }
         return sendResult;
     }
 

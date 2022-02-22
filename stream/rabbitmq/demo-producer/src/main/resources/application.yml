@@ -97,6 +97,10 @@ spring:
           producer:
             # 是否开启异常 Channel，默认为 false 关闭
             error-channel-enabled: true
+        demo-10-output:
+          destination: DEMO-TOPIC-10
+          content-type: application/json
+          binder: rabbit001
       # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
       rabbit:
         bindings:
@@ -113,6 +117,17 @@ spring:
             producer:
               # 设置发送确认的 Channel，默认为 null
               confirm-ack-channel: demo-09-producer-confirm
+          demo-10-output:
+            producer:
+              # 是否开启批量发送功能，默认为 false
+              batching-enabled: true
+              # 超过收集的消息数量的最大条数，默认为 100
+              batch-size: 5
+              # 每次批量发送消息的最大内存，默认为 10000
+              batch-buffer-limit: 10000
+              # 超过收集的时间的最大等待时长，单位：毫秒，默认为 5000
+              ### 超时开始计时的时间，是以最后一次发送时间为起点
+              batch-timeout: 3000
 #
 server:
   port: 18080
