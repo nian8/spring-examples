@@ -1,4 +1,4 @@
-package com.yee.sc.rabbit.producer.config;
+package com.yee.sc.kafka.producer.config;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;

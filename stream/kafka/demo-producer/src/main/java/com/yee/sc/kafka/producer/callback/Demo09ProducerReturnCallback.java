@@ -1,4 +1,4 @@
-package com.yee.sc.rabbit.producer.callback;
+package com.yee.sc.kafka.producer.callback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

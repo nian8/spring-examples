@@ -1,0 +1,42 @@
+GET http://127.0.0.1:18080/actuator/health
+Accept: application/json
+
+###
+GET http://127.0.0.1:18080/actuator/channels
+Accept: application/json
+
+###
+GET http://127.0.0.1:18080/actuator/bindings
+Accept: application/json
+
+###
+GET http://localhost:18080/echo/send_batch
+
+###
+GET http://localhost:18080/echo/send_confirm
+
+###
+GET http://localhost:18080/echo/send_ack
+
+###
+GET http://localhost:18080/echo/send_transaction
+
+###
+GET http://localhost:18080/echo/send_tag
+
+###
+GET http://127.0.0.1:18080/echo/send_orderly
+
+###
+GET http://localhost:18080/echo/send_broadcast
+
+###
+GET http://localhost:18080/echo/send_retry
+
+###
+GET http://localhost:18080/echo/send_delay
+
+###
+GET http://localhost:18080/echo/send
+
+###

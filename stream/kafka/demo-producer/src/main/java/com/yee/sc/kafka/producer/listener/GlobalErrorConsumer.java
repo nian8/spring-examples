@@ -1,4 +1,4 @@
-package com.yee.sc.rabbit.producer.listener;
+package com.yee.sc.kafka.producer.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

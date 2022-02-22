@@ -1,4 +1,4 @@
-package com.yee.sc.rabbit.common.message;
+package com.yee.sc.kafka.common.message;
 
 import java.io.Serializable;
 

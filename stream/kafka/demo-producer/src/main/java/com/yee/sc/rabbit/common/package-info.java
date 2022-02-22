@@ -1,1 +1,0 @@
-package com.yee.sc.rabbit.common;

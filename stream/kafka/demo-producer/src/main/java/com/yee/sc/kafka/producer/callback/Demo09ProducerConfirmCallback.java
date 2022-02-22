@@ -1,6 +1,6 @@
-package com.yee.sc.rabbit.producer.callback;
+package com.yee.sc.kafka.producer.callback;
 
-import com.yee.sc.rabbit.common.message.EchoMessage;
+import com.yee.sc.kafka.common.message.EchoMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.integration.annotation.ServiceActivator;
