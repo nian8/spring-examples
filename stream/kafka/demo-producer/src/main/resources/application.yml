@@ -38,10 +38,9 @@ spring:
             # 分区 key 表达式。该表达式基于 Spring EL，从消息中获得分区 key。
             # headers['partitionKey']
             partition-key-expression: payload['id']
-#        demo-06-output:
-#          destination: DEMO-TOPIC-06
-#          content-type: application/json
-#          binder: rabbit001
+        demo-06-output:
+          destination: DEMO-TOPIC-06
+          content-type: application/json
 #        demo-07-output:
 #          destination: DEMO-TOPIC-07
 #          content-type: application/json

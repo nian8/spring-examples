@@ -60,11 +60,10 @@ spring:
           group: demo-consumer-group-DEMO-TOPIC-05
           consumer:
             concurrency: 2
-#        demo-06-input:
-#          destination: DEMO-TOPIC-06
-#          content-type: application/json
-#          group: demo-consumer-group-DEMO-TOPIC-06
-#          binder: rabbit001
+        demo-06-input:
+          destination: DEMO-TOPIC-06
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-06
 #        demo-07-input:
 #          destination: DEMO-TOPIC-07
 #          content-type: application/json
@@ -106,10 +105,6 @@ spring:
 #      rabbit:
 #        # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
 #        bindings:
-#          demo-01-input:
-#            # RabbitMQ Consumer 配置项，对应 RabbitConsumerProperties 类
-#            consumer:
-#              max-concurrency: 10 # 每个 Consumer 消费线程数的最大大小，默认为 1
 #          demo-02-input:
 #            consumer:
 #              # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
