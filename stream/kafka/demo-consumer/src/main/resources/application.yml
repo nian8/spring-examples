@@ -27,6 +27,10 @@ spring:
           content-type: application/json
           # 消费者分组
           group: demo-consumer-group-DEMO-TOPIC-01
+          # Consumer 配置项，对应 ConsumerProperties 类
+          consumer:
+            # 每个 Consumer 消费线程数的初始大小，默认为 1
+            concurrency: 2
         demo-02-input:
           destination: DEMO-TOPIC-02
           content-type: application/json
