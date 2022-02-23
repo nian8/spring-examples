@@ -1,0 +1,7 @@
+{
+  "type":"SEND_TO_ALL_REQUEST",
+  "body":{
+    "msgId":"838e97e1-6ae9-40f9-99c3-f7127ed64747",
+    "content":"我是一条群聊消息"
+  }
+}

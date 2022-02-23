@@ -9,6 +9,9 @@
     <packaging>pom</packaging>
     <description>spring micro service</description>
     <modules>
+        <!---->
+        <module>websocket</module>
+        <!---->
         <module>nacos/config</module>
         <module>nacos/discovery</module>
         <module>gateway</module>
@@ -18,6 +21,7 @@
         <module>stream/rabbitmq</module>
         <module>stream/kafka</module>
         <module>stream/mqtt</module>
+        <!---->
     </modules>
     <!-- ${basedir} 项目根目录 -->
     <!-- ${project.build.directory} 构建目录，缺省为target -->
