@@ -64,10 +64,6 @@ spring:
           destination: DEMO-TOPIC-06
           content-type: application/json
           group: demo-consumer-group-DEMO-TOPIC-06
-        demo-07-input:
-          destination: DEMO-TOPIC-07
-          content-type: application/json
-          group: demo-consumer-group-DEMO-TOPIC-07
         demo-08-input:
           destination: DEMO-TOPIC-08
           group: demo-consumer-group-DEMO-TOPIC-08
@@ -100,13 +96,6 @@ spring:
               enable-dlq: true
               # 死信队列名，默认为 `errors.{topicName}.{consumerGroup}`
               dlq-name:
-#          demo-07-input:
-#            # Kafka Consumer 配置项，对应 KafkaConsumerProperties 类
-#            consumer:
-#              configuration:
-#                isolation:
-#                  # !!! 读取已提交的消息
-#                  level: read_committed
           demo-08-input:
             # Kafka Consumer 配置项，对应 KafkaConsumerProperties 类
             consumer:

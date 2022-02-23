@@ -9,7 +9,6 @@ import com.yee.sc.kafka.producer.binder.Demo05OutputBinder;
 import com.yee.sc.kafka.producer.binder.Demo06OutputBinder;
 import com.yee.sc.kafka.producer.binder.Demo07OutputBinder;
 import com.yee.sc.kafka.producer.binder.Demo08OutputBinder;
-import com.yee.sc.kafka.producer.binder.Demo09OutputBinder;
 import com.yee.sc.kafka.producer.binder.Demo10OutputBinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,30 +139,6 @@ public class EchoController {
     }
 
     @Autowired
-    private Demo07OutputBinder demo07OutputBinder;
-
-    @Transactional(rollbackFor = Exception.class)
-    @GetMapping("/send_transaction")
-    public boolean sendTransaction() throws InterruptedException {
-        // 创建 Message
-        int id = new Random().nextInt();
-        EchoMessage message = new EchoMessage()
-                .setId(id);
-        // 创建 Spring Message 对象
-        Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
-                .build();
-        // 发送消息
-        boolean sendResult = demo07OutputBinder.getChannel().send(springMessage);
-        logger.info("[sendTransaction][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
-                message.getId(),
-                Demo07OutputBinder.BINDING_NAME,
-                sendResult);
-        // <X> 等待
-        Thread.sleep(3 * 1000L);
-        return sendResult;
-    }
-
-    @Autowired
     private Demo08OutputBinder demo08OutputBinder;
 
     @GetMapping("/send_ack")
@@ -182,9 +157,6 @@ public class EchoController {
                 sendResult);
         return sendResult;
     }
-
-    @Autowired
-    private Demo09OutputBinder demo09OutputBinder;
 
     @Autowired
     private Demo10OutputBinder demo10OutputBinder;

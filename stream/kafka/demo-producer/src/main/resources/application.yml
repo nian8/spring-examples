@@ -41,9 +41,6 @@ spring:
         demo-06-output:
           destination: DEMO-TOPIC-06
           content-type: application/json
-        demo-07-output:
-          destination: DEMO-TOPIC-07
-          content-type: application/json
         demo-08-output:
           destination: DEMO-TOPIC-08
           content-type: application/json
@@ -64,9 +61,6 @@ spring:
               # 是否同步发送消息，默认为 false 异步。
               sync: true
           demo-05-output:
-            producer:
-              sync: true
-          demo-07-output:
             producer:
               sync: true
           demo-10-output:
