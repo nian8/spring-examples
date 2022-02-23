@@ -45,12 +45,11 @@ spring:
             back-off-multiplier: 2.0
             # 重试间隔的最大值，单位毫秒，默认为 10000
             back-off-max-interval: 10000
-#        demo-04-input:
-#          destination: DEMO-TOPIC-04
-#          content-type: application/json
-#          # 消费分组为空时，该 Consumer 生成一个独有且自动删除的 Queue，从而实现广播消费的功能。
-##          group: demo-consumer-group-DEMO-TOPIC-04
-#          binder: rabbit001
+        demo-04-input:
+          destination: DEMO-TOPIC-04
+          content-type: application/json
+          # 消费分组为空时，该 Consumer 生成一个独有且自动删除的 Queue，从而实现广播消费的功能。
+#          group: demo-consumer-group-DEMO-TOPIC-04
 #        demo-05-input:
 #          destination: DEMO-TOPIC-05
 #          content-type: application/json

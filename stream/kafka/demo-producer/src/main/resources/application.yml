@@ -27,10 +27,9 @@ spring:
         demo-03-output:
           destination: DEMO-TOPIC-03
           content-type: application/json
-#        demo-04-output:
-#          destination: DEMO-TOPIC-04
-#          content-type: application/json
-#          binder: rabbit001
+        demo-04-output:
+          destination: DEMO-TOPIC-04
+          content-type: application/json
 #        demo-05-output:
 #          destination: DEMO-TOPIC-05
 #          content-type: application/json

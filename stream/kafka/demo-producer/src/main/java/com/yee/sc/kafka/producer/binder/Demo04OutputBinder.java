@@ -7,7 +7,7 @@ public interface Demo04OutputBinder {
 
     String BINDING_NAME = "demo-04-output";
 
-//    @Output(BINDING_NAME)
+    @Output(BINDING_NAME)
     MessageChannel getChannel();
 
 }
