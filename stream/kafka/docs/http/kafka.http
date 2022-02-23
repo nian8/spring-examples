@@ -13,7 +13,7 @@ Accept: application/json
 GET http://localhost:18080/echo/send_batch
 
 ###
-GET http://localhost:18080/echo/send_confirm
+#GET http://localhost:18080/echo/send_confirm
 
 ###
 GET http://localhost:18080/echo/send_ack

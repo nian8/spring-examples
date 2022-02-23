@@ -47,17 +47,9 @@ spring:
         demo-08-output:
           destination: DEMO-TOPIC-08
           content-type: application/json
-#        demo-09-output:
-#          destination: DEMO-TOPIC-09
-#          content-type: application/json
-#          binder: rabbit002
-#          producer:
-#            # 是否开启异常 Channel，默认为 false 关闭
-#            error-channel-enabled: true
-#        demo-10-output:
-#          destination: DEMO-TOPIC-10
-#          content-type: application/json
-#          binder: rabbit001
+        demo-10-output:
+          destination: DEMO-TOPIC-10
+          content-type: application/json
       # Spring Cloud Stream Kafka 配置项
       kafka:
         # Kafka Binder 配置项，对应 KafkaBinderConfigurationProperties 类
@@ -77,29 +69,13 @@ spring:
           demo-07-output:
             producer:
               sync: true
-      # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
-#      rabbit:
-#        bindings:
-#          demo-02-output:
-#            # RabbitMQ Producer 配置项，对应 RabbitProducerProperties 类
-#            producer:
-#              # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
-#              delayed-exchange: true
-#          demo-09-output:
-#            producer:
-#              # 设置发送确认的 Channel，默认为 null
-#              confirm-ack-channel: demo-09-producer-confirm
-#          demo-10-output:
-#            producer:
-#              # 是否开启批量发送功能，默认为 false
-#              batching-enabled: true
-#              # 超过收集的消息数量的最大条数，默认为 100
-#              batch-size: 5
-#              # 每次批量发送消息的最大内存，默认为 10000
-#              batch-buffer-limit: 10000
-#              # 超过收集的时间的最大等待时长，单位：毫秒，默认为 5000
-#              ### 超时开始计时的时间，是以最后一次发送时间为起点
-#              batch-timeout: 3000
+          demo-10-output:
+            producer:
+              # 批处理延迟时间上限。
+              # 这里配置为 30 * 1000 ms 过后，不管是否消息数量是否到达 batch-size 或者消息大小到达 buffer-memory 后，都直接发送一次请求
+              batch-timeout: 30000
+              # 每次批量发送消息的最大内存
+              buffer-size: 33554432
 #
 server:
   port: 18080

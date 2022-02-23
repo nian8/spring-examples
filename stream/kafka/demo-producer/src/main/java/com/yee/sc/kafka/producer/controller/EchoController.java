@@ -186,23 +186,6 @@ public class EchoController {
     @Autowired
     private Demo09OutputBinder demo09OutputBinder;
 
-    @GetMapping("/send_confirm")
-    public boolean sendConfirm() {
-        // 创建 Message
-        EchoMessage message = new EchoMessage()
-                .setId(new Random().nextInt());
-        // 创建 Spring Message 对象
-        Message<EchoMessage> springMessage = MessageBuilder.withPayload(message)
-                .build();
-        // 发送消息
-        boolean sendResult = demo09OutputBinder.getChannel().send(springMessage);
-        logger.info("[sendConfirm][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
-                message.getId(),
-                Demo09OutputBinder.BINDING_NAME,
-                sendResult);
-        return sendResult;
-    }
-
     @Autowired
     private Demo10OutputBinder demo10OutputBinder;
 
