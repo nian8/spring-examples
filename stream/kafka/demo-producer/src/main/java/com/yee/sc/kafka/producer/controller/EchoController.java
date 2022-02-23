@@ -142,8 +142,7 @@ public class EchoController {
     @Autowired
     private Demo07OutputBinder demo07OutputBinder;
 
-    @Transactional(transactionManager = "rabbitTransactionManager",
-            rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @GetMapping("/send_transaction")
     public boolean sendTransaction() throws InterruptedException {
         // 创建 Message
@@ -155,8 +154,8 @@ public class EchoController {
                 .build();
         // 发送消息
         boolean sendResult = demo07OutputBinder.getChannel().send(springMessage);
-        logger.info("[syncSend][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
-                id,
+        logger.info("[sendTransaction][发送消息 [编号: {}] 至 {} 完成, 结果 = {}]",
+                message.getId(),
                 Demo07OutputBinder.BINDING_NAME,
                 sendResult);
         // <X> 等待

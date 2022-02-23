@@ -64,16 +64,13 @@ spring:
           destination: DEMO-TOPIC-06
           content-type: application/json
           group: demo-consumer-group-DEMO-TOPIC-06
-#        demo-07-input:
-#          destination: DEMO-TOPIC-07
-#          content-type: application/json
-#          group: demo-consumer-group-DEMO-TOPIC-07
-#          binder: rabbit001
-#        demo-08-input:
-#          destination: DEMO-TOPIC-08
-#          content-type: application/json
-#          group: demo-consumer-group-DEMO-TOPIC-08
-#          binder: rabbit001
+        demo-07-input:
+          destination: DEMO-TOPIC-07
+          content-type: application/json
+          group: demo-consumer-group-DEMO-TOPIC-07
+        demo-08-input:
+          destination: DEMO-TOPIC-08
+          group: demo-consumer-group-DEMO-TOPIC-08
 #        demo-09-input:
 #          destination: DEMO-TOPIC-09
 #          content-type: application/json
@@ -102,6 +99,21 @@ spring:
               enable-dlq: true
               # 死信队列名，默认为 `errors.{topicName}.{consumerGroup}`
               dlq-name:
+#          demo-07-input:
+#            # Kafka Consumer 配置项，对应 KafkaConsumerProperties 类
+#            consumer:
+#              configuration:
+#                isolation:
+#                  # !!! 读取已提交的消息
+#                  level: read_committed
+          demo-08-input:
+            # Kafka Consumer 配置项，对应 KafkaConsumerProperties 类
+            consumer:
+              # 是否自动提交消费进度，默认为 true 自动提交。
+              # auto-commit-offset: false
+              # 是否每一条消息都进行提交消费进度，默认为 false 在每一批消费完成后一起提交。
+              # ack-each-record: true
+              ack-mode: MANUAL_IMMEDIATE
 #      rabbit:
 #        # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
 #        bindings:
@@ -109,10 +121,6 @@ spring:
 #            consumer:
 #              # 是否使用 x-delayed-message 类型的 Exchange，即延迟消息，默认为 false
 #              delayed-exchange: true
-#          demo-08-input:
-#            consumer:
-#              # 消费消息的确认模式，默认为 AUTO 自动确认
-#              acknowledge-mode: MANUAL
 #
 server:
   port: ${random.int[10000,19999]} # 随机端口，方便启动多个消费者
