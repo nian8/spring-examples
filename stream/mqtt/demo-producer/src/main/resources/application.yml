@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: demo-producer-application
+#
+server:
+  port: 18080
+#

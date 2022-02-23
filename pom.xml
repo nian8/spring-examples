@@ -17,6 +17,7 @@
         <!---->
         <module>stream/rabbitmq</module>
         <module>stream/kafka</module>
+        <module>stream/mqtt</module>
     </modules>
     <!-- ${basedir} 项目根目录 -->
     <!-- ${project.build.directory} 构建目录，缺省为target -->
