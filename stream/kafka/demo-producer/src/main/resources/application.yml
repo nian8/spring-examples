@@ -30,19 +30,14 @@ spring:
         demo-04-output:
           destination: DEMO-TOPIC-04
           content-type: application/json
-#        demo-05-output:
-#          destination: DEMO-TOPIC-05
-#          content-type: application/json
-#          binder: rabbit001
-#          # Producer 配置项，对应 ProducerProperties 类
-#          producer:
-#            # 分区 key 表达式。该表达式基于 Spring EL，从消息中获得分区 key。
-#            # headers['partitionKey']
-#            partition-key-expression: payload['id']
-#            # 分区大小，默认为 1 分区
-#            partition-count: 2
-#            # 发送到的消费者分组，默认为空
-##            required-groups: demo-consumer-group-DEMO-TOPIC-05
+        demo-05-output:
+          destination: DEMO-TOPIC-05
+          content-type: application/json
+          # Producer 配置项，对应 ProducerProperties 类
+          producer:
+            # 分区 key 表达式。该表达式基于 Spring EL，从消息中获得分区 key。
+            # headers['partitionKey']
+            partition-key-expression: payload['id']
 #        demo-06-output:
 #          destination: DEMO-TOPIC-06
 #          content-type: application/json
@@ -78,6 +73,9 @@ spring:
             # Kafka Producer 配置项，对应 KafkaProducerProperties 类
             producer:
               # 是否同步发送消息，默认为 false 异步。
+              sync: true
+          demo-05-output:
+            producer:
               sync: true
       # RabbitMQ 自定义 Binding 配置项，对应 RabbitBindingProperties Map
 #      rabbit:
