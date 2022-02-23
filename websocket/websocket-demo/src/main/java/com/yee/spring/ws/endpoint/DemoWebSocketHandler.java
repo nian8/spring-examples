@@ -3,7 +3,7 @@ package com.yee.spring.ws.endpoint;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yee.spring.ws.common.handler.MessageHandler;
-import com.yee.spring.ws.common.message.Message;
+import com.yee.spring.ws.common.model.Message;
 import com.yee.spring.ws.message.AuthRequest;
 import com.yee.spring.ws.util.WebSocketUtil;
 import org.slf4j.Logger;
@@ -12,47 +12,42 @@ import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import javax.websocket.CloseReason;
-import javax.websocket.EndpointConfig;
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
-@Controller
-@ServerEndpoint("/")
-public class WebsocketServerEndpoint implements InitializingBean {
+public class DemoWebSocketHandler extends TextWebSocketHandler implements InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 消息类型与 MessageHandler 的映射
      * <p>
-     * 注意，这里设置成静态变量。虽然说 WebsocketServerEndpoint 是单例，但是 Spring Boot 还是会为每个 WebSocket 创建一个 WebsocketServerEndpoint Bean 。
+     * 无需设置成静态变量
      */
-    private static final Map<String, MessageHandler> HANDLERS = new HashMap<>();
+    private final Map<String, MessageHandler> HANDLERS = new ConcurrentHashMap<>();
 
     @Autowired
     private ApplicationContext applicationContext;
 
-    @OnOpen
-    public void onOpen(Session session, EndpointConfig config) {
-        logger.info("[onOpen][session({}) 接入]", session);
+    /**
+     * 对应 open 事件
+     *
+     * @param session
+     * @throws Exception
+     */
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        logger.info("[afterConnectionEstablished][session({}) 接入]", session);
         // 解析 accessToken
-        // ws://127.0.0.1:8080/?accessToken=yee
-        List<String> accessTokenValues = session.getRequestParameterMap().get("accessToken");
-        String accessToken = !CollectionUtils.isEmpty(accessTokenValues) ? accessTokenValues.get(0) : null;
+        String accessToken = (String) session.getAttributes().get("accessToken");
         // 创建 AuthRequest 消息类型
         AuthRequest authRequest = new AuthRequest().setAccessToken(accessToken);
         // 获得消息处理器
@@ -64,13 +59,20 @@ public class WebsocketServerEndpoint implements InitializingBean {
         messageHandler.execute(session, authRequest);
     }
 
-    @OnMessage
-    public void onMessage(Session session, String message) {
+    /**
+     * 对应 message 事件
+     *
+     * @param session
+     * @param textMessage
+     * @throws Exception
+     */
+    @Override
+    public void handleTextMessage(WebSocketSession session, TextMessage textMessage) throws Exception {
         // 生产环境下，请设置成 debug 级别
-        logger.info("[onOpen][session({}) 接收到一条消息({})]", session, message);
+        logger.info("[handleMessage][session({}) 接收到一条消息({})]", session, textMessage);
         try {
             // 获得消息类型
-            JSONObject jsonMessage = JSON.parseObject(message);
+            JSONObject jsonMessage = JSON.parseObject(textMessage.getPayload());
             String messageType = jsonMessage.getString("type");
             // 获得消息处理器
             MessageHandler messageHandler = HANDLERS.get(messageType);
@@ -88,15 +90,29 @@ public class WebsocketServerEndpoint implements InitializingBean {
         }
     }
 
-    @OnClose
-    public void onClose(Session session, CloseReason closeReason) {
-        logger.info("[onClose][session({}) 连接关闭。关闭原因是({})}]", session, closeReason);
+    /**
+     * 对应 close 事件
+     *
+     * @param session
+     * @param status
+     * @throws Exception
+     */
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        logger.info("[afterConnectionClosed][session({}) 连接关闭。关闭原因是({})}]", session, status);
         WebSocketUtil.removeSession(session);
     }
 
-    @OnError
-    public void onError(Session session, Throwable throwable) {
-        logger.info("[onClose][session({}) 发生异常]", session, throwable);
+    /**
+     * 对应 error 事件
+     *
+     * @param session
+     * @param exception
+     * @throws Exception
+     */
+    @Override
+    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+        logger.info("[handleTransportError][session({}) 发生异常]", session, exception);
     }
 
     @Override

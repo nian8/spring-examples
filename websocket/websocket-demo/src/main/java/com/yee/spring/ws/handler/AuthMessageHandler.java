@@ -7,14 +7,13 @@ import com.yee.spring.ws.message.UserJoinNoticeRequest;
 import com.yee.spring.ws.util.WebSocketUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-
-import javax.websocket.Session;
+import org.springframework.web.socket.WebSocketSession;
 
 @Component
 public class AuthMessageHandler implements MessageHandler<AuthRequest> {
 
     @Override
-    public void execute(Session session, AuthRequest message) {
+    public void execute(WebSocketSession session, AuthRequest message) {
         // 如果未传递 accessToken
         if (ObjectUtils.isEmpty(message.getAccessToken())) {
             WebSocketUtil.send(session, AuthResponse.TYPE,

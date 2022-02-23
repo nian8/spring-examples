@@ -6,14 +6,13 @@ import com.yee.spring.ws.message.SendToAllRequest;
 import com.yee.spring.ws.message.SendToUserRequest;
 import com.yee.spring.ws.util.WebSocketUtil;
 import org.springframework.stereotype.Component;
-
-import javax.websocket.Session;
+import org.springframework.web.socket.WebSocketSession;
 
 @Component
 public class SendToAllHandler implements MessageHandler<SendToAllRequest> {
 
     @Override
-    public void execute(Session session, SendToAllRequest message) {
+    public void execute(WebSocketSession session, SendToAllRequest message) {
         // 这里，假装直接成功
         SendResponse sendResponse = new SendResponse().setMsgId(message.getMsgId()).setCode(0);
         WebSocketUtil.send(session, SendResponse.TYPE, sendResponse);

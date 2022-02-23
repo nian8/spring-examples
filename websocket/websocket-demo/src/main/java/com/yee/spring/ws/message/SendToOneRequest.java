@@ -1,6 +1,6 @@
 package com.yee.spring.ws.message;
 
-import com.yee.spring.ws.common.message.Message;
+import com.yee.spring.ws.common.model.Message;
 import lombok.Getter;
 
 /**

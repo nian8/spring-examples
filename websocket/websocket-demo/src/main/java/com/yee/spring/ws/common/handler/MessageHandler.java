@@ -1,8 +1,7 @@
 package com.yee.spring.ws.common.handler;
 
-import com.yee.spring.ws.common.message.Message;
-
-import javax.websocket.Session;
+import com.yee.spring.ws.common.model.Message;
+import org.springframework.web.socket.WebSocketSession;
 
 /**
  * 消息处理器接口
@@ -15,11 +14,9 @@ public interface MessageHandler<T extends Message> {
      * @param session 会话
      * @param message 消息
      */
-    void execute(Session session, T message);
+    void execute(WebSocketSession session, T message);
 
     /**
-     * desc
-     *
      * @return 消息类型，即每个 Message 实现类上的 TYPE 静态字段
      */
     String getType();
