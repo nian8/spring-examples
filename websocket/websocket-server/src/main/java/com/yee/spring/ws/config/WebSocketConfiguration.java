@@ -7,15 +7,22 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+/**
+ * 开启 Spring WebSocket
+ */
 @Configuration
-@EnableWebSocket // 开启 Spring WebSocket
+@EnableWebSocket
 public class WebSocketConfiguration implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(this.webSocketHandler(), "/") // 配置处理器
-                .addInterceptors(new EchoWebSocketShakeInterceptor()) // 配置拦截器
-                .setAllowedOrigins("*"); // 解决跨域问题
+        registry
+                // 配置处理器
+                .addHandler(this.webSocketHandler(), "/")
+                // 配置拦截器
+                .addInterceptors(new EchoWebSocketShakeInterceptor())
+                // 解决跨域问题
+                .setAllowedOrigins("*");
     }
 
     @Bean
