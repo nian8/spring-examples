@@ -1,11 +1,13 @@
 package com.yee.spring.stomp.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yee.spring.stomp.message.SendToAllRequest;
 import com.yee.spring.stomp.message.SendToUserRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -24,21 +26,14 @@ public class SendController {
     @SendTo(value = "/topic/send_to_all")
     public SendToUserRequest sendToAll(SendToAllRequest message) {
         logger.info("[sendToAll][SendToAllRequest({})]", message);
-//        // 创建转发的消息
-//        SendToUserRequest sendToUserRequest = new SendToUserRequest().setMsgId(message.getMsgId())
-//                .setContent(message.getContent());
-//        // 广播发送
-//        WebSocketUtil.broadcast(SendToUserRequest.TYPE, sendToUserRequest);
-
-        // 这里，假装直接成功
-//        return new SendResponse().setMsgId(message.getMsgId()).setCode(0);
-        return new SendToUserRequest().setMsgId(message.getMsgId())
+        return new SendToUserRequest()
+                .setMsgId(message.getMsgId())
                 .setContent(message.getContent());
     }
 
-//    @SubscribeMapping("/topic/send_to_all")
-//    public void subSendToAll(SendToUserRequest message) {
-//        logger.info("[subSendToAll][SendToUserRequest({})]", message);
-//    }
+    @SubscribeMapping("/topic/send_to_all")
+    public void subSendToAll(SendToUserRequest message) {
+        logger.info("[subSendToAll][SendToUserRequest({})]", JSONObject.toJSONString(message));
+    }
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Main {
+public class StompClientMain {
 
     public static void main(String[] args) {
         List<Transport> transports = new ArrayList<>(1);

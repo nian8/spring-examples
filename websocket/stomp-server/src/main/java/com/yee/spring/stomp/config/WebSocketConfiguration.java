@@ -15,23 +15,17 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");
+        //
         registry.setApplicationDestinationPrefixes("/app");
+        //
+        registry.enableSimpleBroker("/topic");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-//        registry.addEndpoint("/send_to_all")
-//                .setAllowedOrigins("*")
-//                .withSockJS();
         registry.addEndpoint("/")
                 .setAllowedOrigins("*")
                 .withSockJS();
-
-//        RequestUpgradeStrategy upgradeStrategy = new TomcatRequestUpgradeStrategy();
-//        registry.addEndpoint("/")
-//                .setHandshakeHandler(new DefaultHandshakeHandler(upgradeStrategy))
-//                .setAllowedOrigins("*");
     }
 
 }
