@@ -11,8 +11,8 @@
     <artifactId>s-websocket</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <!--<module>websocket-demo</module>-->
         <module>websocket-server</module>
-        <!--<module>stomp-demo</module>-->
+        <!---->
+        <module>stomp-server</module>
     </modules>
 </project>
