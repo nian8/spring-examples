@@ -21,6 +21,13 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
         registry.setApplicationDestinationPrefixes("/app");
     }
 
+    /**
+     * #withSockJS 方法定义了支持 SockJS 连接，
+     * 优先使用原生的 WebSocket，
+     * 如果浏览器不支持，则降级使用 SockJS
+     *
+     * @param registry
+     */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/im")

@@ -16,8 +16,9 @@ public class SendController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
-     * TODO https://blog.csdn.net/fly_leopard/article/details/78664409
+     * https://blog.csdn.net/fly_leopard/article/details/78664409
      * 暂时先跳过
+     * MessageMapping 拦截 /app/send_to_all
      *
      * @param message
      * @return
@@ -31,6 +32,11 @@ public class SendController {
                 .setContent(message.getContent());
     }
 
+    /**
+     * SubscribeMapping 拦截 /app/topic/send_to_all
+     *
+     * @param message
+     */
     @SubscribeMapping("/topic/send_to_all")
     public void subSendToAll(SendToUserRequest message) {
         logger.info("[subSendToAll][SendToUserRequest({})]", JSONObject.toJSONString(message));

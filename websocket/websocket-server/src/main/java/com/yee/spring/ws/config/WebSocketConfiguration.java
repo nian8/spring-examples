@@ -16,13 +16,16 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        // WebSocket 通道
         registry
                 // 配置处理器
                 .addHandler(this.webSocketHandler(), "/")
                 // 配置拦截器
-                .addInterceptors(new EchoWebSocketShakeInterceptor())
+                .addInterceptors(this.webSocketShakeInterceptor())
                 // 解决跨域问题
                 .setAllowedOrigins("*");
+        // SockJS 通道
+        // withSockJS()
     }
 
     @Bean
