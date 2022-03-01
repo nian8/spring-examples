@@ -23,6 +23,7 @@ public interface DemoProviderFeignClient extends ProviderService {
      * @param userDto dto
      * @return dto
      */
+    @Override
     @GetMapping("/get_user")
     UserDto getUser(@SpringQueryMap UserDto userDto);
 
