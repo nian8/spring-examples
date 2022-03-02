@@ -18,7 +18,7 @@ public class MessageTask {
     WebsocketService websocketService;
 
     @Async
-    @Scheduled(cron = "0/1 * * * * ?")
+    @Scheduled(cron = "0/15 * * * * ?")
     public void run() {
         //
         SendReq sendReq = new SendReq();
