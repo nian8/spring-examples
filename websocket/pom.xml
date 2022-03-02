@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>websocket-server</module>
+        <module>websocket-client</module>
         <!---->
         <module>stomp-server</module>
     </modules>

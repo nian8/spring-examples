@@ -1,0 +1,8 @@
+{
+  "cmd":"SEND_REQ",
+  "seq":1000,
+  "data":{
+    "token":"eaef4a3c-35dd-46ee-b548-f9c4eb6396fe",
+    "content":"我是一条单聊消息"
+  }
+}
