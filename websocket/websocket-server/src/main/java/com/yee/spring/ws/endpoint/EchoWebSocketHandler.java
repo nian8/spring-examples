@@ -13,6 +13,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.PongMessage;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -23,7 +24,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DemoWebSocketHandler extends TextWebSocketHandler implements InitializingBean {
+public class EchoWebSocketHandler extends TextWebSocketHandler implements InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -88,6 +89,11 @@ public class DemoWebSocketHandler extends TextWebSocketHandler implements Initia
         } catch (Throwable throwable) {
             logger.info("[onMessage][session({}) message({}) 发生异常]", session, throwable);
         }
+    }
+
+    @Override
+    protected void handlePongMessage(WebSocketSession session, PongMessage message) throws Exception {
+        super.handlePongMessage(session, message);
     }
 
     /**

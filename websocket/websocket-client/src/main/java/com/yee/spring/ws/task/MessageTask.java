@@ -1,12 +1,14 @@
 package com.yee.spring.ws.task;
 
-import com.yee.spring.ws.client.WebsocketService;
+import com.alibaba.fastjson.JSONObject;
+import com.yee.spring.ws.handler.EchoWebSocketHandler;
 import com.yee.spring.ws.model.SendReq;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.client.WebSocketConnectionManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,10 +17,12 @@ import java.util.Map;
 public class MessageTask {
 
     @Autowired
-    WebsocketService websocketService;
+    EchoWebSocketHandler echoHandler;
+    @Autowired
+    WebSocketConnectionManager connectionManager;
 
     @Async
-    @Scheduled(cron = "0/15 * * * * ?")
+//    @Scheduled(cron = "0/15 * * * * ?")
     public void run() {
         //
         SendReq sendReq = new SendReq();
@@ -26,6 +30,15 @@ public class MessageTask {
         Map<String, String> map = new HashMap<>(8);
         map.put("content", "hello world!");
         sendReq.setData(map);
-        websocketService.send(sendReq);
+        echoHandler.sendText(JSONObject.toJSONString(sendReq));
+    }
+
+    @Async
+    @Scheduled(cron = "0/15 * * * * ?")
+    public void ping() {
+        if (!echoHandler.isConnected()) {
+            connectionManager.startInternal();
+        }
+        echoHandler.sendPong();
     }
 }

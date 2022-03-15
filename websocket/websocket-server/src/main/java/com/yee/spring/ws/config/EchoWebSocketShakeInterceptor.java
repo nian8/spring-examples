@@ -4,8 +4,10 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -31,10 +33,26 @@ public class EchoWebSocketShakeInterceptor extends HttpSessionHandshakeIntercept
         // 获得 accessToken
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest serverRequest = (ServletServerHttpRequest) request;
-            attributes.put("accessToken", serverRequest.getServletRequest().getParameter("accessToken"));
+            //解决The extension [x-webkit-deflate-frame] is not supported问题
+            if (request.getHeaders().containsKey(WebSocketHttpHeaders.SEC_WEBSOCKET_EXTENSIONS)) {
+                request.getHeaders().set(WebSocketHttpHeaders.SEC_WEBSOCKET_EXTENSIONS, "permessage-deflate");
+            }
+
+            HttpSession session = serverRequest.getServletRequest().getSession();
+            if (session == null) {
+                return Boolean.FALSE;
+            }
+            //
+            attributes.put("token", serverRequest.getServletRequest().getParameter("token"));
+            // 调用父方法，继续执行逻辑
+            return super.beforeHandshake(request, response, wsHandler, attributes);
         }
-        // 调用父方法，继续执行逻辑
-        return super.beforeHandshake(request, response, wsHandler, attributes);
+        return Boolean.FALSE;
     }
 
+    @Override
+    public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
+                               WebSocketHandler wsHandler, Exception ex) {
+        super.afterHandshake(request, response, wsHandler, ex);
+    }
 }

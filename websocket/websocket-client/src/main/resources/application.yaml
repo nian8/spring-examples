@@ -1,3 +1,6 @@
 #
-monitor:
-  log-path: /Users/nian8/logs/monitor-logs/
+spring:
+  main.allow-circular-references: true
+server:
+  port: ${random.int[10000,19999]}
+#
